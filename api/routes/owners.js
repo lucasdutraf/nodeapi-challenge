@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
-        message: "GET owners request"
+        message: 'GET owners request'
     });
 });
 
@@ -12,10 +12,11 @@ router.post('/', (req, res, next) => {
         name: req.body.name,
         vehicleId: req.body.vehicleId,
         email: req.body.email
-    }
+    };
     res.status(201).json({
         message: "POST owners request",
         owner: owner
+    });
 });
 
 router.get('/:ownerId', (req, res, next) => {
