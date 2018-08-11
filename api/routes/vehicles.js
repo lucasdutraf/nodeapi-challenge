@@ -13,4 +13,20 @@ router.post('/', (req, res, next) => {
     });
 });
 
+router.get('/:vehicleId', (req, res, next) => {
+    const id = req.params.vehicleId;
+    if (id === 'special'){
+        res.status(200).json({
+            message: 'special',
+            id: id
+        });
+    }
+    else {
+        res.status(200).json({
+            message: 'passe ID'
+        });
+    }
+});
+
+
 module.exports = router;
