@@ -8,8 +8,14 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    const owner = {
+        name: req.body.name,
+        vehicleId: req.body.vehicleId,
+        email: req.body.email
+    }
     res.status(201).json({
-        message: "POST owners request"
+        message: "POST owners request",
+        owner: owner
     });
 });
 
