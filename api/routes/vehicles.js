@@ -28,5 +28,16 @@ router.get('/:vehicleId', (req, res, next) => {
     }
 });
 
+router.patch('/:vehicleId', (req, res, next) => {
+    res.status(200).json({
+        message: 'updated vehicle'
+    });
+});
+
+router.delete('/:vehicleId', (req, res, next) => {
+    res.status(200).json({
+        message: 'deleted vehicle'
+    });
+});
 
 module.exports = router;
