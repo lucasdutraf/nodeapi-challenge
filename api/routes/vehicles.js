@@ -8,9 +8,16 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+
+    const vehicle = {
+        brand: req.body.brand,
+        year: req.body.year,
+        style: req.body.style
+         
+    };
     res.status(201).json({
-        message: "POST request"
-    });
+        message: "POST request",
+        createVehicle: vehicle
 });
 
 router.get('/:vehicleId', (req, res, next) => {
