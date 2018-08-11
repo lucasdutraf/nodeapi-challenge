@@ -16,7 +16,6 @@ router.post('/', (req, res, next) => {
     res.status(201).json({
         message: "POST owners request",
         owner: owner
-    });
 });
 
 router.get('/:ownerId', (req, res, next) => {

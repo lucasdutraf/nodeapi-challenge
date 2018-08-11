@@ -8,6 +8,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+
     const vehicle = {
         brand: req.body.brand,
         year: req.body.year,
@@ -17,7 +18,6 @@ router.post('/', (req, res, next) => {
     res.status(201).json({
         message: "POST request",
         createVehicle: vehicle
-    });
 });
 
 router.get('/:vehicleId', (req, res, next) => {
