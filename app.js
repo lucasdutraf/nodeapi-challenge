@@ -2,11 +2,17 @@ const express = require ('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 
 const vehiclesRoutes = require('./api/routes/vehicles');
 const ownersRoutes = require('./api/routes/owners');
 
+mongoose.connect('mongodb+srv://dutra:dutradutra@challenge-nodeapi-vnsua.mongodb.net/test?retryWrites=true', 
+    { 
+        useNewUrlParser: true 
+    }
+);
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
