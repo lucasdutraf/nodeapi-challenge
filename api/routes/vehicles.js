@@ -6,9 +6,24 @@ const Vehicle = require('../models/vehicle');
 
 router.get('/', (req, res, next) => {
     Vehicle.find()
+    .select('brand year style _id')
     .exec()
     .then(docs => {
-        console.log(docs);
+        const response = {
+            count: docs.length, 
+            vehicle: docs.map(doc => {
+                return {
+                    brand: doc.brand, 
+                    year: doc.year, 
+                    style: doc.style,
+                    _id: doc._id, 
+                    request: {
+                        type: 'GET', 
+                        url: 'http://localhost:3000/vehicles/' + doc._id
+                    }
+                }
+            })
+        }
         // if (docs.lenght >= 0){
             res.status(200).json(docs);
         // }
@@ -38,8 +53,17 @@ router.post('/', (req, res, next) => {
     .then(result =>{
         console.log(result);
         res.status(201).json({
-            message: "POST request",
-            createVehicle: result
+            message: "Created vehicle successfully",
+            createVehicle: {
+                brand: result.brand,
+                year: result.year, 
+                style: result.style, 
+                _id: result._id,
+                request: {
+                    type: 'POST',
+                    url: 'http://localhost:3000/vehicles/' + result._id
+                }
+            }
         });
     })
     .catch(err => {
@@ -53,11 +77,18 @@ router.post('/', (req, res, next) => {
 router.get('/:vehicleId', (req, res, next) => {
     const id = req.params.vehicleId;
     Vehicle.findById(id)
+    .select('brand year style _id')
     .exec()
     .then(doc => {
         console.log("From database", doc);
         if(doc){
-            res.status(200).json(doc);
+            res.status(200).json({
+                vehicle: doc,
+                request: {
+                    type: 'GET',
+                    url: 'http://localhost:3000/vehicles/'
+                }
+            });
         }
         else {
             res.status(404).json({
@@ -81,8 +112,13 @@ router.patch('/:vehicleId', (req, res, next) => {
     Vehicle.update({_id: id}, { $set: updateOps })
     .exec()
     .then(result => {
-        console.log(result);
-        res.status(200).json(result);
+        res.status(200).json({
+            message: 'Vehicle updated',
+            request: {
+                type: 'PATCH',
+                url: 'http://localhost:3000/vehicles/' + id
+            }
+        });
     })
     .catch(err => {
         console.log(err);
@@ -98,7 +134,18 @@ router.delete('/:vehicleId', (req, res, next) => {
     .exec()
     .then(result => {
         console.log(result);
-        res.status(200).json(result);
+        res.status(200).json({
+            message: 'Vehicle deleted',
+            request: {
+                type: 'DELETE',
+                url: 'http://localhost:3000/vehicles/', 
+                data: {
+                    brand: 'String',
+                    year: 'Number',
+                    style: 'String'
+                }
+            }
+        });
     })
     .catch(err => {
         console.log(err);
