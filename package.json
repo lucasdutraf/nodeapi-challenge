@@ -4,14 +4,16 @@
   "description": "restful challenge api",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lucasdutraf/nodeapi-challenge.git"
   },
   "keywords": [
-    "restful"
+    "restful",
+    "nodeapi"
   ],
   "author": "Lucas Dutra",
   "license": "ISC",
@@ -20,6 +22,12 @@
   },
   "homepage": "https://github.com/lucasdutraf/nodeapi-challenge#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.7",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
   }
 }
